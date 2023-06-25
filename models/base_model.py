@@ -3,7 +3,7 @@
 
 from sqlalchemy.orm import declarative_base
 import uuid
-from models import storage
+import models
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime
 
@@ -56,8 +56,8 @@ class BaseModel:
     def save(self):
         """Save object updates"""
         self.updated_at = datetime.now()
-        storage.new(self)
-        storage.save()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
         """Return dictionary representation of object"""
@@ -75,4 +75,4 @@ class BaseModel:
     def delete(self):
         """ delete object
         """
-        storage.delete(self)
+        models.storage.delete(self)
