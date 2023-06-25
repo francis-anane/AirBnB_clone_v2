@@ -4,6 +4,12 @@ from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy import (create_engine)
 from models.base_model import Base
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class DBStorage:
@@ -39,8 +45,8 @@ class DBStorage:
                 key = "{}.{}".format(type(element).__name__, element.id)
                 dic[key] = element
         else:
-            classes = self.classes()
-            for cls in __classes:
+            classes = [User, State, City, Place, Amenity, Review]
+            for cls in classes:
                 query = self.__session.query(cls)
                 for element in query:
                     key = "{}.{}".format(type(element).__name__, element.id)
